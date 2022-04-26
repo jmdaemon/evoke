@@ -1,3 +1,4 @@
+use log::{debug, error, info, warn};
 use std::fs::read_dir;
 
 /// Wordnet database dictionary
