@@ -1,11 +1,19 @@
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(non_upper_case_globals)]
+// Include wordnet bindings
+include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
 // Third Party Crates
 use log::{debug, error, info, warn};
 
 // Standard Library
+use std::ffi::{CStr, CString};
 use std::fs::read_dir;
 use std::path::Path;
 use std::collections::HashMap;
 use std::process::exit;
+
 
 /// Wordnet database dictionary
 #[derive(Default, Debug)]
@@ -52,12 +60,27 @@ pub fn init(path: &str) -> Wordnet {
 }
 
 /// Find all senses for a word
-pub fn senses(wordnet: Wordnet, word: &str) -> Vec<String> {
-    let mut senses = vec![];
+//pub fn senses(wordnet: Wordnet, word: &str) -> Vec<String> {
+    //let mut senses = vec![];
 
-    // Search database
-}
+    //// Search database
+//}
 
 fn main() {
-    println!("Hello, world!");
+    //println!("Hello, world!");
+
+    unsafe {
+        wninit();
+        println!("Wordnet database has been initialized");
+
+        //let word = CString::new("bank").unwrap();
+        //let mut typess: &'static [u8;2usize] = b"s\0";
+        let mut sensetype = 's' as libc::c_char;
+        //let sensetypeptr: *const i8 = sensetype.as_ptr().cast();
+        //let typess = std::ptr::addr_of!(sensetype);
+
+        //let sstype = getsstype(typess);
+        let sstype = getsstype(&mut sensetype);
+        println!("sstype: {}", sstype);
+    }
 }
