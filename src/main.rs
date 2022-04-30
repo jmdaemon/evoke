@@ -33,7 +33,7 @@ pub fn init(path: &str) -> Wordnet {
         let filepath = format!("{}/{}", path, filename);
         let file = Path::new(&filepath);
         if file.exists() {
-            indices.insert(word_type, filename);
+            indices.insert(word_type, filepath);
         }
     }
 
@@ -44,21 +44,18 @@ pub fn init(path: &str) -> Wordnet {
         let filepath = format!("{}/{}", path, filename);
         let file = Path::new(&filepath);
         if file.exists() {
-            data.insert(word_type, filename);
+            data.insert(word_type, filepath);
         }
     }
 
-    // Open the index files
-    // Get the extension [noun, adv, adj]
-    // Open the data files
-    // Initialize Wordnet with index and data files
-
-
-    //let files = std::fs::read_dir(path).unwrap();
-    //for file in files {
-        //let entry = file.unwrap();
-    //}
     Wordnet { indices, data }
+}
+
+/// Find all senses for a word
+pub fn senses(wordnet: Wordnet, word: &str) -> Vec<String> {
+    let mut senses = vec![];
+
+    // Search database
 }
 
 fn main() {
